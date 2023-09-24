@@ -15,10 +15,16 @@ public class PerkController {
     @Autowired
     private PerkService perkService;
 
-    @GetMapping("/perks")
-    public List<Perk> getAllPerks() {
+    @GetMapping
+    public List<PerkDto> getAllPerks() {
         return perkService.getAllPerks();
     }
+
+    // Get all custom Perks created by User
+//    @GetMapping("/user/{userId}")
+//    public List<PerkDto> getPerksByUser(@PathVariable Long userId) {
+//        return perkService.getAllPerksByUserId(userId);
+//    }
 
     @DeleteMapping("/{perkId}")
     public void deletePerkById(@PathVariable Long perkId) {

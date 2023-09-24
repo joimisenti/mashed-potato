@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +28,13 @@ public class PerkServiceImpl implements PerkService {
 
     // Get all Perks
     @Override
-    public List<Perk> getAllPerks() {
-        return perkRepository.findAll();
+    public List<PerkDto> getAllPerks() {
+        List<Perk> perks = perkRepository.findAll();
+        List<PerkDto> perkDtos = new ArrayList<>();
+        for (Perk perk : perks) {
+            perkDtos.add(new PerkDto(perk));
+        }
+        return perkDtos;
     }
 
     // Add a perk to the Perks list set uniquely by a User

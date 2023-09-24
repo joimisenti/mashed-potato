@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface PerkService {
     // Get all Perks
-    List<Perk> getAllPerks();
+    List<PerkDto> getAllPerks();
 
     // Delete a Perk
     @Transactional
