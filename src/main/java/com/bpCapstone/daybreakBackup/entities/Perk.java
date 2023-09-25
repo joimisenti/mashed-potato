@@ -13,7 +13,7 @@ public class Perk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "varchar(25)")
+    @Column(columnDefinition = "varchar(50)")
     private String name;
 
     @Column(columnDefinition = "varchar(15)")

@@ -2,7 +2,9 @@ package com.bpCapstone.daybreakBackup.controllers;
 
 import com.bpCapstone.daybreakBackup.dtos.PerkDto;
 import com.bpCapstone.daybreakBackup.entities.Perk;
+import com.bpCapstone.daybreakBackup.services.PerkSeederService;
 import com.bpCapstone.daybreakBackup.services.PerkService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,15 @@ import java.util.Optional;
 public class PerkController {
     @Autowired
     private PerkService perkService;
+
+    @Autowired
+    private PerkSeederService perkSeederService;
+
+    @PostMapping("/seedPerks")
+    public void seedPerks() {
+        perkSeederService.seedPerksFromTxtFile("/Users/jmisenti/Desktop/Java-Specs/daybreakBackup/src/main/" +
+                "java/com/bpCapstone/daybreakBackup/assets/survivor_perks.txt");
+    }
 
     @GetMapping
     public List<PerkDto> getAllPerks() {
