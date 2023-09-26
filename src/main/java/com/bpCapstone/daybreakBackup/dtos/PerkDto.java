@@ -14,6 +14,8 @@ public class PerkDto implements Serializable {
 
     private Long id;
     private String name;
+    private String image;
+    private String teachable;
     private String survivor;
 
     public PerkDto(Perk perk) {
@@ -22,6 +24,12 @@ public class PerkDto implements Serializable {
         }
         if (perk.getName() != null) {
             this.name = perk.getName();
+        }
+        if (perk.getImage() != null) {
+            this.name = perk.getImage();
+        }
+        if (perk.getTeachable() != null) {
+            this.name = perk.getTeachable();
         }
         if (perk.getSurvivor() != null) {
             this.survivor = perk.getSurvivor();

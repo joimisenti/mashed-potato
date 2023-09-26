@@ -2,7 +2,6 @@ package com.bpCapstone.daybreakBackup.services;
 
 import com.bpCapstone.daybreakBackup.dtos.PerkDto;
 import com.bpCapstone.daybreakBackup.entities.Perk;
-import com.bpCapstone.daybreakBackup.entities.User;
 import com.bpCapstone.daybreakBackup.repositories.LoadoutRepository;
 import com.bpCapstone.daybreakBackup.repositories.PerkRepository;
 import com.bpCapstone.daybreakBackup.repositories.UserRepository;
@@ -11,10 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PerkServiceImpl implements PerkService {
@@ -85,5 +82,11 @@ public class PerkServiceImpl implements PerkService {
             return Optional.of(new PerkDto(perkOptional.get()));
         }
         return Optional.empty();
+    }
+
+    // Save a Perk being loaded from JSON file
+    @Transactional
+    public void savePerk(Perk perk) {
+        perkRepository.save(perk);
     }
 }

@@ -1,6 +1,7 @@
 package com.bpCapstone.daybreakBackup.entities;
 
 import com.bpCapstone.daybreakBackup.dtos.PerkDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -16,7 +17,13 @@ public class Perk {
     @Column(columnDefinition = "varchar(50)")
     private String name;
 
-    @Column(columnDefinition = "varchar(15)")
+    @Column
+    private String image;
+
+    @Column(columnDefinition = "varchar(60)")
+    private String teachable;
+
+    @Column
     private String survivor;
 
     public Long getId() {
@@ -35,6 +42,22 @@ public class Perk {
         this.name = name;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getTeachable() {
+        return teachable;
+    }
+
+    public void setTeachable(String teachable) {
+        this.teachable = teachable;
+    }
+
     public String getSurvivor() {
         return survivor;
     }
@@ -48,19 +71,28 @@ public class Perk {
     }
 
     // All-arguments Constructor
-    public Perk(Long id, String name, String survivor) {
+    public Perk(Long id, String name, String image, String teachable, String survivor) {
         this.id = id;
         this.name = name;
+        this.image = image;
+        this.teachable = teachable;
         this.survivor = survivor;
     }
 
     // Create the Many-to-Many relationship with the Loadouts table
     @ManyToMany(mappedBy = "perks")
+    @JsonBackReference
     private Set<Loadout> loadouts = new HashSet<>();
 
     public Perk(PerkDto perkDto) {
         if (perkDto.getName() != null) {
             this.name = perkDto.getName();
+        }
+        if (perkDto.getImage() != null) {
+            this.name = perkDto.getImage();
+        }
+        if (perkDto.getTeachable() != null) {
+            this.name = perkDto.getTeachable();
         }
         if (perkDto.getSurvivor() != null) {
             this.survivor = perkDto.getSurvivor();

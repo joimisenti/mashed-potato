@@ -20,16 +20,13 @@ public class Loadout {
 
 
     // Create the Many-to-Many relationship with the Loadout_Perks Association table
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "Loadout_Perks",
             joinColumns = { @JoinColumn(name = "loadout_id") },
             inverseJoinColumns = { @JoinColumn(name = "perk_id") }
     )
     private Set<Perk> perks = new HashSet<>();
-//    @Column(columnDefinition = "text[]")
-//    @Type(value = com.bpCapstone.daybreak.entities.PostgreSqlStringArrayType.class)
-//    private String[] perks;
 
     @Column(columnDefinition = "text")
     private String summary;
@@ -101,14 +98,5 @@ public class Loadout {
             this.summary = loadoutDto.getSummary();
         }
     }
-
-    // Create the Many-to-Many relationship with the Loadouts table
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @JoinTable(
-//            name = "Loadout_Perks",
-//            joinColumns = { @JoinColumn(name = "loadout_id") },
-//            inverseJoinColumns = { @JoinColumn(name = "perk_id") }
-//    )
-//    private Set<Perk> perkSet = new HashSet<>();
 
 }

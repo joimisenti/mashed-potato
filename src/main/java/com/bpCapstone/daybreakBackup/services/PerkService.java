@@ -24,4 +24,7 @@ public interface PerkService {
 
     // Get a Perk by the Perk id
     Optional<PerkDto> getPerkById(Long perkId);
+
+    @Transactional
+    void savePerk(Perk perk);
 }

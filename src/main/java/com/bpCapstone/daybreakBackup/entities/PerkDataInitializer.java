@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class PerkDataInitializer {
 
     // Inject the Perk repository to populate with data
+    // Useful for manual insertions of data by me
     @Autowired
     private PerkRepository perkRepository;
 

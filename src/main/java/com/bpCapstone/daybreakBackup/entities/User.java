@@ -69,18 +69,4 @@ public class User {
             this.password = userDto.getPassword();
         }
     }
-//    @JoinTable(
-//    name = "Loadouts",
-//    joinColumns = { @JoinColumn(name = "loadout_id") },
-//    inverseJoinColumns = { @JoinColumn(name = "user_id")
-//    @JsonManagedReference
-//    private Set<Loadout> loadoutSet = new HashSet<>();
-
-//    @OneToMany
-//    @JoinTable(
-//            name = "Loadouts",
-//            joinColumns = @JoinColumn(name = "loadout_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id")
-//    )
-//    private Set<Loadout> loadoutSet = new HashSet<>();
 }
