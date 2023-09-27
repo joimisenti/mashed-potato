@@ -1,3 +1,6 @@
+// An array to store selected perks
+const selectedPerks = [];
+
 // Function to fetch perks from Spring Boot API
 function fetchPerks() {
     fetch('/api/v1/perks')
@@ -19,7 +22,23 @@ function fetchPerks() {
 
             const selectButton = document.createElement('button');
             selectButton.textContent = 'Select';
-            selectButton.addEventListener('click', () => toggleSelectPerk(perk));
+
+            // Event listeners to handle perk selection
+            selectButton.addEventListener('click', () => {
+                if (selectedPerks.length < 4) {
+                    // Check if the perk is not already in the selectedPerks list
+                    if (!selectedPerks.some(selectedPerk => selectedPerk.id === perk.id)) {
+                        selectedPerks.push(perk);
+                        updateSelectedPerks();
+                    } else {
+                        alert('This perk is already selected.');
+                    }
+                } else {
+                    // Handle case where maximum perks are selected
+                    alert('You can select up to 4 perks.')
+                }
+            });
+
             perkItem.appendChild(selectButton);
 
             document.querySelector('.perk-grid').appendChild(perkItem);
@@ -28,10 +47,33 @@ function fetchPerks() {
 }
 
 // Function to toggle the selection of a perk
-function toggleSelectPerk(perk) {
+function updateSelectedPerks() {
     // Implement logic allowing selection of up to 4 perks
     // Add or remove the perk from the "Selected Perks" list
+    const selectedPerksList = document.getElementById('selected-perks-list');
+    selectedPerksList.innerHTML = ''; // Clear the previous selections
+
+    // Loop through selected perks and create list items
+    selectedPerks.forEach(perk => {
+        const listItem = document.createElement('li');
+        listItem.textContent = perk.name;
+
+        const listIcon = document.createElement('img');
+        listIcon.src = perk.image;
+        listItem.appendChild(listIcon);
+
+        // Add a button to remove the perk from the selection
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', () => {
+            selectedPerks.splice(selectedPerks.indexOf(perk), 1);
+            updateSelectedPerks();
+        });
+
+        listItem.appendChild(removeButton);
+        selectedPerksList.appendChild(listItem);
+    });
 }
 
-// Call fetchPerks function when the page laods
+// Call fetchPerks function when the page loads
 window.addEventListener('load', fetchPerks);
