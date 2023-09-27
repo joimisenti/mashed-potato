@@ -26,10 +26,10 @@ public class PerkDto implements Serializable {
             this.name = perk.getName();
         }
         if (perk.getImage() != null) {
-            this.name = perk.getImage();
+            this.image = perk.getImage();
         }
         if (perk.getTeachable() != null) {
-            this.name = perk.getTeachable();
+            this.teachable = perk.getTeachable();
         }
         if (perk.getSurvivor() != null) {
             this.survivor = perk.getSurvivor();
